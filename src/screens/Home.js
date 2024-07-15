@@ -1,0 +1,187 @@
+import React from "react";
+import { StyleSheet, Platform,Text, View, Image, useWindowDimensions, ImageBackground, ScrollView} from "react-native";
+import styled from "styled-components/native";
+import {  Carousel} from "../components";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { MaterialIcons } from '@expo/vector-icons';
+
+
+const Container = styled.View`
+
+`;
+
+const TopTxt = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px 20px;
+`;
+
+const BigTxt = styled.Text`
+  font-size: 20px;
+  line-height: 30px;
+`
+const MidTxt = styled.Text`
+  font-size: 16px;
+  line-height: 24px;
+`
+const SmallTxt = styled.Text`
+  font-size: 14px;
+  line-height: 20px;
+`
+
+const Name = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const LogoutBtn = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #888;
+  padding:5px 13px;
+  margin-right: 10px;
+  border-radius: 20px;
+  color: ${({ theme }) => theme.inputLabel};
+`;
+
+
+const CarouselBox = styled.View`
+  height:300px;
+  overflow: visible;
+  margin-left: -22px;
+  margin-top: -20px;
+`;
+
+const LectureBox = styled.TouchableOpacity`
+  width: 100%;
+  height: 177px ;
+  background-color: #FFD600;
+  border-radius: 16px;
+  padding:30px;
+`;
+
+const FlexBox = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+`
+const GridBtn = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`
+const SmallButton = styled.TouchableOpacity`
+  padding: 20px;
+  justify-content: space-between;
+  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 16px;
+  width: 48%;
+  height: 106px;
+`
+ 
+const BigButton = styled.TouchableOpacity`
+  padding: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 16px;
+  width: 100%;
+  height: 62px;
+`
+
+const styles = StyleSheet.create({
+  shadow:{
+    ...Platform.select({
+      ios: {
+        shadowColor:"rgba(0,0,0)",
+        shadowOpacity: 0.08,
+        shadowRadius: 5,
+        shadowOffset: {
+          height: 5,
+          width: 0
+        }
+        },
+        android: {
+          elevation: 3
+        }
+      })
+    }
+  })
+
+const Home =  ({ navigation }) => {
+  const insets = useSafeAreaInsets(); //아이폰 노치 문제 해결
+  const data = [{image: require('../../assets/banner1.png'),},{image: require('../../assets/banner2.png'),},{image: require('../../assets/banner3.png'),}]
+  const {width} = useWindowDimensions();
+  return (
+    <ImageBackground 
+    style={{ width: "100%", height: "100%" }}  //View를 꽉채우도록
+    source={require("../../assets/main_bg.png")}  //이미지경로
+    resizeMode="cover" // 'cover', 'contain', 'stretch', 'repeat', 'center' 중 선택 
+    >
+    <Container insets={insets}>
+        <TopTxt style={styles.shadow}>
+          <Name>
+            <BigTxt style={{ fontWeight: 600, marginRight:3}}>홍길동</BigTxt>
+            <SmallTxt>님</SmallTxt>
+          </Name>
+          <LogoutBtn>
+            <MidTxt>로그아웃</MidTxt>
+          </LogoutBtn>
+        </TopTxt>
+        <ScrollView style={{paddingHorizontal:20, marginBottom:70}}>
+          <CarouselBox style={{width:width}}>
+            <Carousel data={data} />
+          </CarouselBox>
+          <LectureBox activeOpacity={.8}>
+            <FlexBox>
+              <Image source={require('../../assets/profile_icon.png')}/>
+              <View>
+                <Name>
+                  <BigTxt style={{ fontWeight: 600, marginRight:3}}>홍길동</BigTxt>
+                  <SmallTxt>님</SmallTxt>
+                </Name>
+                <SmallTxt>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>
+              </View>
+            </FlexBox>
+            <View style={{width:'100%', backgroundColor:'#rgba(255,255,255,.5)', paddingVertical: 13, borderRadius: 26}}>
+                <SmallTxt style={{textAlign:'center'}}>
+                  회원님은 총 <Text style={{color:'#008DF3'}}>3개</Text>의 과정을 수강하고 있습니다.
+                </SmallTxt>
+            </View>
+          </LectureBox>
+          <GridBtn>
+            <SmallButton style={styles.shadow} activeOpacity={.8}>
+              <Image source={require('../../assets/main_icon1.png')}/>
+              <MidTxt>앱 사용방법</MidTxt>
+            </SmallButton>
+            <SmallButton style={styles.shadow} activeOpacity={.8}>
+              <Image source={require('../../assets/main_icon2.png')}/>
+              <MidTxt>자주 묻는 질문</MidTxt>
+            </SmallButton>
+          </GridBtn>
+          <BigButton style={styles.shadow}>
+            <Image source={require('../../assets/main_icon3.png')}/>
+            <MidTxt>공지사항 바로가기</MidTxt>
+            <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
+          </BigButton>
+          <BigButton style={styles.shadow}>
+            <Image source={require('../../assets/main_icon4.png')}/>
+            <MidTxt>고객센터 바로가기</MidTxt>
+            <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
+          </BigButton>
+        </ScrollView>
+       
+      </Container>
+      </ImageBackground>
+  );
+};
+
+
+
+
+export default Home;
