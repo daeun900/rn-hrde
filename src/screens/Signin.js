@@ -4,6 +4,7 @@ import { ThemeContext } from "styled-components/native";
 import styled from "styled-components/native";
 import { Button,Image,Input } from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 
 const Container = styled.Pressable`
@@ -34,35 +35,41 @@ margin: 15px 0 30px 0;
 
 
 
-const Signin = ({ navigation }) => {
+const Signin = () => {
   const insets = useSafeAreaInsets(); //아이폰 노치 문제 해결
   const theme = useContext(ThemeContext);
 
   const [id, setID] = useState('');
   const [password, setPassword] = useState('');
   const refPassword = useRef(null);
+  const navigation = useNavigation();
 
   const _handleSigninBtnPress = () => {
     login();
   }
 
-    function login() {
+    const login = () => {
       if (id.trim() === "") {
           Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
       } else if (password.trim() === "") {
           Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
       } else {
-          axios.post("https://jsonplaceholder.typicode.com/users", //json 주소
-              null, 
-              { params: {id: id, pwd: password} }
-          ).then(function(resp) { //통신성공
-              if (resp.data !== null && resp.data != "") {
+          axios.post("http://new.hrdeedu.com/mobileTest/sign_in.php", //json 주소
+            { id: id, pwd: password }
+          ).then((response) => { //통신성공
+            const result = response.data.result; 
+              if (result === "Y") {
                   navigation.navigate("Tab")
-              } else {
+                } else if (result === "N1") {
                   Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
                   setId("");
                   setPassword("");
-              }
+                } else if (result === "N2") {
+                  Alert.alert("로그인 실패", "비밀번호가 일치하지 않습니다.");
+                  setPassword("");
+                } else if (result === "N3") {
+                  Alert.alert("로그인 실패", "휴면 계정입니다.");
+                }
           }).catch(function(err) { //통신실패
               console.log(`Error Message: ${err}`);
           })
@@ -80,7 +87,6 @@ const Signin = ({ navigation }) => {
         placeholder="아이디를 입력하세요."
         returnKeyType="next"
         value={id}
-        key={id}
         onChangeText={setID}
         onSubmitEditing={()=>refPassword.current.focus()}
         />

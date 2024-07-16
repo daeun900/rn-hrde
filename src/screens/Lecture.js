@@ -164,7 +164,7 @@ const LectureList = ({ navigation }) => {
         <Container>
             <FlatList
               data={data}
-              renderItem={({ item }) => <Item title={item.title} classNum={item.classNum} progressNum={item.progressNum} progressPercent={item.progressPercent}  />}
+              renderItem={({ item }) => <Item title={item.title} classNum={item.classNum} progressNum={item.progressNum} progressPercent={item.progressPercent} navigation={navigation} />}
               keyExtractor={item => item.id}
               />
         </Container>
