@@ -1,20 +1,14 @@
 import React from "react";
 import { StyleSheet, Platform,Text, View, Image, useWindowDimensions, ImageBackground, ScrollView} from "react-native";
 import styled from "styled-components/native";
-import {  Carousel} from "../components";
+import { TopSec, Carousel} from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MaterialIcons } from '@expo/vector-icons';
 
 
-const Container = styled.View`
-
-`;
-
-const TopTxt = styled.View`
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 15px 20px;
+const Container = styled.ScrollView`
+  padding: 0 20px;
+  margin-bottom: 65px;
 `;
 
 const BigTxt = styled.Text`
@@ -35,21 +29,10 @@ const Name = styled.View`
   align-items: center;
 `;
 
-const LogoutBtn = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  border: 1px solid #888;
-  padding:5px 13px;
-  margin-right: 10px;
-  border-radius: 20px;
-  color: ${({ theme }) => theme.inputLabel};
-`;
-
-
 const CarouselBox = styled.View`
   height:300px;
   overflow: visible;
-  margin-left: -22px;
+  margin-left: -20px;
   margin-top: -20px;
 `;
 
@@ -123,60 +106,52 @@ const Home =  ({ navigation }) => {
     source={require("../../assets/main_bg.png")}  //이미지경로
     resizeMode="cover" // 'cover', 'contain', 'stretch', 'repeat', 'center' 중 선택 
     >
-    <Container insets={insets}>
-        <TopTxt style={styles.shadow}>
-          <Name>
-            <BigTxt style={{ fontWeight: 600, marginRight:3}}>홍길동</BigTxt>
-            <SmallTxt>님</SmallTxt>
-          </Name>
-          <LogoutBtn>
-            <MidTxt>로그아웃</MidTxt>
-          </LogoutBtn>
-        </TopTxt>
-        <ScrollView style={{paddingHorizontal:20, marginBottom:70}}>
-          <CarouselBox style={{width:width}}>
-            <Carousel data={data} />
-          </CarouselBox>
-          <LectureBox activeOpacity={.8}>
-            <FlexBox>
-              <Image source={require('../../assets/profile_icon.png')}/>
-              <View>
-                <Name>
-                  <BigTxt style={{ fontWeight: 600, marginRight:3}}>홍길동</BigTxt>
-                  <SmallTxt>님</SmallTxt>
-                </Name>
-                <SmallTxt>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>
+    <View insets={insets}>
+        <TopSec/>
+        <Container>
+            <CarouselBox style={{width:width}}>
+                <Carousel data={data} />
+            </CarouselBox>
+            <LectureBox activeOpacity={.8} onPress={() => navigation.navigate("Lecture")}>
+              <FlexBox>
+                  <Image source={require('../../assets/profile_icon.png')}/>
+                  <View>
+                    <Name>
+                        <BigTxt style={{ fontWeight: 600, marginRight:3}}>홍길동</BigTxt>
+                        <SmallTxt>님</SmallTxt>
+                    </Name>
+                    <SmallTxt>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>
+                  </View>
+              </FlexBox>
+              <View style={{width:'100%', backgroundColor:'#rgba(255,255,255,.5)', paddingVertical: 13, borderRadius: 26}}>
+                  <SmallTxt style={{textAlign:'center'}}>
+                    회원님은 총 <Text style={{color:'#008DF3'}}>3개</Text>의 과정을 수강하고 있습니다.
+                  </SmallTxt>
               </View>
-            </FlexBox>
-            <View style={{width:'100%', backgroundColor:'#rgba(255,255,255,.5)', paddingVertical: 13, borderRadius: 26}}>
-                <SmallTxt style={{textAlign:'center'}}>
-                  회원님은 총 <Text style={{color:'#008DF3'}}>3개</Text>의 과정을 수강하고 있습니다.
-                </SmallTxt>
-            </View>
-          </LectureBox>
+            </LectureBox>
           <GridBtn>
             <SmallButton style={styles.shadow} activeOpacity={.8}>
-              <Image source={require('../../assets/main_icon1.png')}/>
-              <MidTxt>앱 사용방법</MidTxt>
+                <Image source={require('../../assets/main_icon1.png')}/>
+                <MidTxt>앱 사용방법</MidTxt>
             </SmallButton>
             <SmallButton style={styles.shadow} activeOpacity={.8}>
-              <Image source={require('../../assets/main_icon2.png')}/>
-              <MidTxt>자주 묻는 질문</MidTxt>
+                <Image source={require('../../assets/main_icon2.png')}/>
+                <MidTxt>자주 묻는 질문</MidTxt>
             </SmallButton>
           </GridBtn>
           <BigButton style={styles.shadow}>
-            <Image source={require('../../assets/main_icon3.png')}/>
-            <MidTxt>공지사항 바로가기</MidTxt>
-            <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
+              <Image source={require('../../assets/main_icon3.png')}/>
+              <MidTxt>공지사항 바로가기</MidTxt>
+              <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
           </BigButton>
           <BigButton style={styles.shadow}>
-            <Image source={require('../../assets/main_icon4.png')}/>
-            <MidTxt>고객센터 바로가기</MidTxt>
-            <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
+              <Image source={require('../../assets/main_icon4.png')}/>
+              <MidTxt>고객센터 바로가기</MidTxt>
+              <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
           </BigButton>
-        </ScrollView>
+        </Container>
        
-      </Container>
+      </View>
       </ImageBackground>
   );
 };

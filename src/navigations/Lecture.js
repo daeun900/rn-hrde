@@ -1,23 +1,25 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { CScenter,FAQ } from "../screens";
+import { LectureList, LectureDetail } from "../screens";
 
 const Stack = createStackNavigator();
 
 
-const CScontainer = () => {
+const Lecture  = () => {
 
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen
-            name="CScenter"
-            component={CScenter}
+            name="LectureList"
+            component={LectureList}
+            options={{headerShown: false}}
         />
         <Stack.Screen
-          name="FAQ"
-          component={FAQ}
+          name="LectureDetail"
+          component={LectureDetail}
+          options={{headerShown: false}}
         />
        
       </Stack.Navigator>
@@ -26,4 +28,4 @@ const CScontainer = () => {
   );
 };
 
-export default CScontainer;
+export default Lecture;

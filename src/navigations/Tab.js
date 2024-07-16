@@ -2,9 +2,10 @@ import React,{useContext} from "react";
 import { Image, TouchableOpacity, Text } from "react-native";
 import { ThemeContext } from "styled-components/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Lecture, CScenter, Etc } from "../screens";
+import { Home, Etc } from "../screens";
 import {Feather} from '@expo/vector-icons'
 import CScontainer from "./CS";
+import Lecture from "./Lecture";
 
 const TabIcon = ({name, focused}) => {
     const theme = useContext(ThemeContext);
@@ -20,7 +21,10 @@ const TabNav = () => {
         <Tab.Navigator
             screenOptions={{
                 tabBarActiveTintColor: '#000000',
-                tabBarInactiveTintColor: '#a6a6a6'
+                tabBarInactiveTintColor: '#a6a6a6',
+                tabBarStyle: {
+                    height: 90
+                }
             }}
         >
             <Tab.Screen name="Home" component={Home} 
@@ -45,8 +49,11 @@ const TabNav = () => {
             />
             <Tab.Screen name="Lecture" component={Lecture} 
                 options={{
-                    headerShown: false,
-                    tabBarLabel: '온라인 학습실',
+                    title: '나의 학습실',
+                    shadowOpacity: 0,
+                    headerShadowVisible: false,
+                    headerBackTitleVisible: false,
+                    tabBarLabel: '나의 학습실',
                     tabBarIcon: ({focused}) =>
                         TabIcon({
                             name: focused ? 'user' : 'user', focused
