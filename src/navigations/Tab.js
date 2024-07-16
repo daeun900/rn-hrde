@@ -2,10 +2,10 @@ import React,{useContext} from "react";
 import { Image, TouchableOpacity, Text } from "react-native";
 import { ThemeContext } from "styled-components/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Etc } from "../screens";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Home, Etc,LectureList, LectureDetail, CScenter, FAQ } from "../screens";
 import {Feather} from '@expo/vector-icons'
-import CScontainer from "./CS";
-import Lecture from "./Lecture";
 
 const TabIcon = ({name, focused}) => {
     const theme = useContext(ThemeContext);
@@ -13,8 +13,50 @@ const TabIcon = ({name, focused}) => {
     color = {focused ? theme.tabBtnActive : theme.tabBtnInactive}/>
 }
 
-
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const Lecture  = () => {
+
+    return (
+      <NavigationContainer independent={true}>
+        <Stack.Navigator>
+          <Stack.Screen
+              name="LectureList"
+              component={LectureList}
+              options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="LectureDetail"
+            component={LectureDetail}
+            options={{headerShown: false}}
+          />
+         
+        </Stack.Navigator>
+      </NavigationContainer>
+   
+    );
+  };
+
+  const CScontainer = () => {
+
+    return (
+      <NavigationContainer independent={true}>
+        <Stack.Navigator>
+          <Stack.Screen
+              name="CScenter"
+              component={CScenter}
+          />
+          <Stack.Screen
+            name="FAQ"
+            component={FAQ}
+          />
+         
+        </Stack.Navigator>
+      </NavigationContainer>
+   
+    );
+  };
 
 const TabNav = () => {
     return (

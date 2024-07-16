@@ -112,9 +112,9 @@ const fetchData = async () => {
   ];
 };
 
-const Item = ({title,classNum,progressNum,progressPercent}) => {
+const Item = ({title,classNum,progressNum,progressPercent,navigation}) => {
   return(
-    <Lecture  style={styles.shadow} activeOpacity={.8}>
+    <Lecture  style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("LectureDetail")}>
       <TitleBox>
           <Title>{title}</Title>
       </TitleBox>

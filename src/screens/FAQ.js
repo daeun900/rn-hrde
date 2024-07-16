@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import { View } from "react-native-web";
 
 const Container = styled.View`
   flex: 1;
@@ -16,7 +17,11 @@ const StyledText = styled.Text`
 
 const FAQ = () => {
   return (
-    <View></View>
+    <Container>
+      <StyledText>
+        FAQ
+      </StyledText>
+    </Container>
   )
 };
 
