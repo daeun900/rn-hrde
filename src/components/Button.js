@@ -13,7 +13,7 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-    font-size: 20 px;
+    font-size: 20px;
     color: ${({theme})=> theme.btnTitle};
 `;
 
