@@ -1,8 +1,10 @@
-import React,{useEffect, useState}from "react";
+import React,{useEffect, useState, useContext}from "react";
 import styled from "styled-components/native";
 import { StyleSheet, Platform,Text, View, Image, useWindowDimensions, ImageBackground, ScrollView, FlatList, ActivityIndicator} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TopSec} from "../components";
+import { useLectureContext } from "../context/lectureContext";
+import { UserContext } from "../context/userContext";
 
 const Container = styled.View`
   margin-bottom: 120px;
@@ -68,91 +70,20 @@ const styles = StyleSheet.create({
     }
   })
 
-const DATA = [
-  {
-    id: '1',
-    title: '개인정보보호교육',
-    classNum: '1',
-    progress: '0',
-    progressPercent: '0'
-  }
-]
-
-const fetchData = async () => {
-  // 예시 데이터를 가져오는 함수 (비동기 작업을 모방)
-  return [
-    {
-      id: '1',
-      title: 'AI로 변화되는 미래_인공지능을 모르면 바보가 된다_기업직업훈련',
-      classNum: '1',
-      progressNum:'0',
-      progressPercent:'0'
-    },
-    {
-      id: '2',
-      title: '개인정보보호교육',
-      classNum: '1',
-      progressNum:'0',
-      progressPercent:'0'
-    },
-    {
-      id: '3',
-      title: '개인정보보호교육',
-      classNum: '1',
-      progressNum:'0',
-      progressPercent:'0'
-    },
-    {
-      id: '4',
-      title: '개인정보보호교육',
-      classNum: '1',
-      progressNum:'0',
-      progressPercent:'0'
-    },
-  ];
-};
-
-const Item = ({title,classNum,progressNum,progressPercent,navigation}) => {
-  return(
-    <Lecture  style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("LectureDetail")}>
-      <TitleBox>
-          <Title>{title}</Title>
-      </TitleBox>
-      <DetailBox>
-          <DetailTitle>현재 진행상태</DetailTitle>
-          <Detail><Point>{classNum}차시</Point></Detail>
-      </DetailBox>
-      <DetailBox>
-          <DetailTitle>강의진도</DetailTitle>
-          <Detail><Point>{progressNum}</Point>/1</Detail>
-      </DetailBox>
-      <DetailBox>
-          <DetailTitle>진도율</DetailTitle>
-          <Detail><Point>{progressPercent}</Point>%</Detail>
-      </DetailBox>
-    </Lecture>
-  )
-}
-
 
 
 const LectureList = ({ navigation }) => {
   const insets = useSafeAreaInsets(); //아이폰 노치 문제 해결
-  const [data, setData] = useState(null); // 초기 상태는 null로 설정
+  const { lectures, fetchLectureData  } = useLectureContext(lectures);
+  const { userNm, updateUserNm  } = useContext(UserContext);
 
   useEffect(() => {
-    const loadData = async () => {
-      const result = await fetchData();
-      setData(result); // 데이터를 가져오면 상태를 업데이트
-    };
-
-    loadData();
+    fetchLectureData();
   }, []);
 
-  if (!data) {
-    // 데이터가 아직 로드되지 않았다면 로딩 스피너를 표시
+  if (!lectures.length) {
     return (
-      <View style={styles.loadingContainer}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
@@ -160,11 +91,11 @@ const LectureList = ({ navigation }) => {
 
   return (
     <View insets={insets}>
-        <TopSec/>
+        <TopSec name={userNm}/>
         <Container>
             <FlatList
-              data={data}
-              renderItem={({ item }) => <Item title={item.title} classNum={item.classNum} progressNum={item.progressNum} progressPercent={item.progressPercent} navigation={navigation} />}
+              data={lectures}
+              renderItem={({ item }) => <Item ContentsName={item.ContentsName} ProgressStep={item.ProgressStep} ProgressNum={item.ProgressNum} Progress={item.Progress} navigation={navigation} />}
               keyExtractor={item => item.id}
               />
         </Container>
@@ -172,5 +103,26 @@ const LectureList = ({ navigation }) => {
   );
 }; 
 
+const Item = ({ContentsName,ProgressStep,ProgressNum,Progress,navigation}) => {
+  return(
+    <Lecture  style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("LectureDetail")}>
+      <TitleBox>
+          <Title>{ContentsName}</Title>
+      </TitleBox>
+      <DetailBox>
+          <DetailTitle>현재 진행상태</DetailTitle>
+          <Detail><Point>{ProgressStep}</Point></Detail>
+      </DetailBox>
+      <DetailBox>
+          <DetailTitle>강의진도</DetailTitle>
+          <Detail><Point>{ProgressStep}</Point>/{ProgressNum}</Detail>
+      </DetailBox>
+      <DetailBox>
+          <DetailTitle>진도율</DetailTitle>
+          <Detail><Point>{Progress}</Point>%</Detail>
+      </DetailBox>
+    </Lecture>
+  )
+}
 
 export default LectureList;
