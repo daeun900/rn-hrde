@@ -1,6 +1,6 @@
 import React,{useEffect, useState, useContext}from "react";
 import styled from "styled-components/native";
-import { StyleSheet, Platform,Text, View, Image, useWindowDimensions, ImageBackground, ScrollView, FlatList, ActivityIndicator} from "react-native";
+import { StyleSheet, Platform,View, FlatList, ActivityIndicator} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TopSec} from "../components";
 import { useLectureContext } from "../context/lectureContext";
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 const LectureList = ({ navigation }) => {
   const insets = useSafeAreaInsets(); //아이폰 노치 문제 해결
   const { lectures, fetchLectureData  } = useLectureContext(lectures);
-  const { userNm, updateUserNm  } = useContext(UserContext);
+  const {  userNm} = useContext(UserContext);
 
   useEffect(() => {
     fetchLectureData();

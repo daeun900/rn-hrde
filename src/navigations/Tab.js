@@ -2,10 +2,11 @@ import React,{useContext} from "react";
 import { Image, TouchableOpacity, Text } from "react-native";
 import { ThemeContext } from "styled-components/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Home, Etc,LectureList, LectureDetail, CScenter, FAQ } from "../screens";
 import {Feather} from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native';
+
 
 const TabIcon = ({name, focused}) => {
     const theme = useContext(ThemeContext);
@@ -17,19 +18,40 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const Lecture  = () => {
-
     return (
         <Stack.Navigator>
           <Stack.Screen
               name="LectureList"
               component={LectureList}
-              options={{headerShown: false}}
+              options={({navigation}) => ({     
+                title: '나의 학습실',
+                shadowOpacity: 0,
+                headerShadowVisible: false,
+                tabBarLabel: '나의 학습실',
+                headerLeft: () => (
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={{paddingLeft:20, marginRight:-10}}>
+                        <Feather name="arrow-left" size={24} color="black" />
+                    </TouchableOpacity>
+                  ),
+                  headerTitleAlign: 'left',
+              })}
           />
           <Stack.Screen
             name="LectureDetail"
             component={LectureDetail}
-            options={{headerShown: false}}
-          />
+            options={({navigation}) => ({  
+                title: '나의 학습실',
+                shadowOpacity: 0,
+                headerShadowVisible: false,
+                tabBarLabel: '나의 학습실',
+                headerLeft: () => (
+                    <TouchableOpacity onPress={() => navigation.pop()} style={{padding: 20, marginRight:-10}}>
+                        <Feather name="arrow-left" size={24} color="black" />
+                    </TouchableOpacity>
+                  ),
+                  headerTitleAlign: 'left',
+                })}
+            />
          
         </Stack.Navigator>
    
@@ -55,6 +77,7 @@ const Lecture  = () => {
   };
 
 const TabNav = () => {
+  
     return (
         <Tab.Navigator
             screenOptions={{
@@ -67,6 +90,7 @@ const TabNav = () => {
         >
             <Tab.Screen name="Home" component={Home} 
                 options={{
+                    
                     headerTitle:props => (   <Image   style={{ width: 158, height: 24}} source={require('../../assets/logo.png')}/>),
                     headerTitleAlign: "center",
                     shadowOpacity: 0,
@@ -86,12 +110,7 @@ const TabNav = () => {
                 }}
             />
             <Tab.Screen name="Lecture" component={Lecture} 
-                options={{
-                    title: '나의 학습실',
-                    shadowOpacity: 0,
-                    headerShadowVisible: false,
-                    headerBackTitleVisible: false,
-                    tabBarLabel: '나의 학습실',
+                options={{headerShown: false,
                     tabBarIcon: ({focused}) =>
                         TabIcon({
                             name: focused ? 'user' : 'user', focused

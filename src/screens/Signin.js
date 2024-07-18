@@ -12,7 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Container = styled.Pressable`
   flex: 1;
   justify-content: flex-start;
-
   background-color: #F8F8F8;
   padding: 0 20px;
   padding-top: ${({ insets: { top } }) => top}px;

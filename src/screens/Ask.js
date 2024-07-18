@@ -6,11 +6,11 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.background};
-  padding: 0 20px;
+  padding: 0 20;
 `;
 
 const StyledText = styled.Text`
-  font-size: 30px;
+  font-size: 30;
   color: #111111;
 `;
 
