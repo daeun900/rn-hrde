@@ -1,10 +1,8 @@
 import React, {useContext} from "react";
 import { ThemeContext } from "styled-components/native";
-import styled from "styled-components/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Start, Signin } from "../screens";
+import { Start, Signin, Home } from "../screens";
 import TabNav from "./Tab";
-import { MaterialIcons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 
@@ -28,16 +26,9 @@ const Auth = () => {
       <Stack.Screen
         name="Tab"
         component={TabNav}
-        options={{
-          headerShown: false
-          // headerRight: ({onPress}) => (
-          //   <LogoutContainer onPress={onPress}>
-          //     <MaterialIcons name="logout" size={15} color="#888" />
-          //     <Text style={{color: '#888', marginLeft:3}}>로그아웃</Text>
-          //   </LogoutContainer>
-          // ),
-        }}
-      />
+        options={{headerShown: false }}
+      >
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };

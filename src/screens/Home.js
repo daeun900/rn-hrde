@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect , useContext} from "react";
 import { StyleSheet, Platform,Text, View, Image, useWindowDimensions, ImageBackground, ScrollView} from "react-native";
 import styled from "styled-components/native";
 import { TopSec, Carousel} from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MaterialIcons } from '@expo/vector-icons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserContext } from "../context/userContext";
 
 const Container = styled.ScrollView`
   padding: 0 20px;
@@ -96,10 +97,19 @@ const styles = StyleSheet.create({
     }
   })
 
+
 const Home =  ({ navigation }) => {
+
   const insets = useSafeAreaInsets(); //아이폰 노치 문제 해결
   const data = [{image: require('../../assets/banner1.png'),},{image: require('../../assets/banner2.png'),},{image: require('../../assets/banner3.png'),}]
   const {width} = useWindowDimensions();
+  const { userNm, updateUserNm  } = useContext(UserContext);
+
+
+  useEffect(() => {
+    updateUserNm();
+  }, []);
+
   return (
     <ImageBackground 
     style={{ width: "100%", height: "100%" }}  //View를 꽉채우도록
@@ -107,7 +117,7 @@ const Home =  ({ navigation }) => {
     resizeMode="cover" // 'cover', 'contain', 'stretch', 'repeat', 'center' 중 선택 
     >
     <View insets={insets}>
-        <TopSec/>
+        <TopSec name={userNm}/>
         <Container>
             <CarouselBox style={{width:width}}>
                 <Carousel data={data} />
@@ -116,8 +126,8 @@ const Home =  ({ navigation }) => {
               <FlexBox>
                   <Image source={require('../../assets/profile_icon.png')}/>
                   <View>
-                    <Name>
-                        <BigTxt style={{ fontWeight: 600, marginRight:3}}>홍길동</BigTxt>
+                    <Name name={userNm}>
+                        <BigTxt style={{ fontWeight: 600, marginRight:3}}>{userNm}</BigTxt>
                         <SmallTxt>님</SmallTxt>
                     </Name>
                     <SmallTxt>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>

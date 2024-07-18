@@ -19,7 +19,6 @@ const Stack = createStackNavigator();
 const Lecture  = () => {
 
     return (
-      <NavigationContainer independent={true}>
         <Stack.Navigator>
           <Stack.Screen
               name="LectureList"
@@ -33,7 +32,6 @@ const Lecture  = () => {
           />
          
         </Stack.Navigator>
-      </NavigationContainer>
    
     );
   };
@@ -41,7 +39,6 @@ const Lecture  = () => {
   const CScontainer = () => {
 
     return (
-      <NavigationContainer independent={true}>
         <Stack.Navigator>
           <Stack.Screen
               name="CScenter"
@@ -53,7 +50,6 @@ const Lecture  = () => {
           />
          
         </Stack.Navigator>
-      </NavigationContainer>
    
     );
   };
