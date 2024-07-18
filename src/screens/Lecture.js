@@ -95,7 +95,7 @@ const LectureList = ({ navigation }) => {
         <Container>
             <FlatList
               data={lectures}
-              renderItem={({ item }) => <Item ContentsName={item.ContentsName} ProgressStep={item.ProgressStep} ProgressNum={item.ProgressNum} Progress={item.Progress} navigation={navigation} />}
+              renderItem={({ item }) => <Item ContentsName={item.ContentsName} ProgressStep={item.ProgressStep} ProgressNum={item.ProgressNum} ProgressP={item.ProgressP} navigation={navigation} />}
               keyExtractor={item => item.id}
               />
         </Container>
@@ -103,9 +103,9 @@ const LectureList = ({ navigation }) => {
   );
 }; 
 
-const Item = ({ContentsName,ProgressStep,ProgressNum,Progress,navigation}) => {
+const Item = ({ContentsName,ProgressStep,ProgressNum,ProgressP,navigation}) => {
   return(
-    <Lecture  style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("LectureDetail")}>
+    <Lecture  style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("LectureDetail", { ContentsName, ProgressStep, ProgressNum, ProgressP })}>
       <TitleBox>
           <Title>{ContentsName}</Title>
       </TitleBox>
@@ -119,7 +119,7 @@ const Item = ({ContentsName,ProgressStep,ProgressNum,Progress,navigation}) => {
       </DetailBox>
       <DetailBox>
           <DetailTitle>진도율</DetailTitle>
-          <Detail><Point>{Progress}</Point>%</Detail>
+          <Detail><Point>{ProgressP}</Point>%</Detail>
       </DetailBox>
     </Lecture>
   )

@@ -45,7 +45,7 @@ const Lecture  = () => {
                 headerShadowVisible: false,
                 tabBarLabel: '나의 학습실',
                 headerLeft: () => (
-                    <TouchableOpacity onPress={() => navigation.pop()} style={{padding: 20, marginRight:-10}}>
+                    <TouchableOpacity onPress={() => navigation.pop()} style={{paddingLeft: 20, marginRight:-10}}>
                         <Feather name="arrow-left" size={24} color="black" />
                     </TouchableOpacity>
                   ),

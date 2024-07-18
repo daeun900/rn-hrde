@@ -28,7 +28,7 @@ export const LectureProvider = ({ children }) => {
           ProgressStep: lecture[1],
           ProgressNum: lecture[2],
           Chapter: lecture[3],
-          Progress: lecture[4],
+          ProgressP: lecture[4],
         }));
 
         setLectures(formattedLectureList);
