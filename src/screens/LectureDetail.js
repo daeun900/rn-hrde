@@ -8,7 +8,6 @@ import { useRoute } from '@react-navigation/native';
 
 const Container = styled.ScrollView`
   padding: 25px;
-  margin-bottom: 60px;
   background-color: #fff;
   border-top-width: 1px;
   border-color: #ededed ;
@@ -147,9 +146,9 @@ const LectureDetail = ({ navigation }) => {
   console.log({ ContentsName, ProgressStep, ProgressNum, ProgressP } );
 
   return (
-    <View insets={insets}>
+    <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm}/>
-        <Container>
+        <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
           <LectureDetailBox>
               <Title>
                   {ContentsName}
@@ -199,7 +198,7 @@ const LectureDetail = ({ navigation }) => {
                     <MidTxt>{item.title}</MidTxt>
                 </View>
                 <View style={{alignItems:'center'}}>
-                    <YellowButton><MidTxt style={{color:'#fff'}}>수강하기</MidTxt></YellowButton>
+                    <YellowButton onPress={() => navigation.navigate("LectureCerti", { ContentsName })}><MidTxt style={{color:'#fff'}}>수강하기</MidTxt></YellowButton>
                     <Text><MidTxt>{item.progress}</MidTxt><SmallTxt>%</SmallTxt></Text>
                 </View>
               </ListItem>))

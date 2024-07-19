@@ -6,8 +6,7 @@ import { TopSec} from "../components";
 import { useLectureContext } from "../context/lectureContext";
 import { UserContext } from "../context/userContext";
 
-const Container = styled.View`
-  margin-bottom: 120px;
+const Container = styled.ScrollView`
   background-color: #F8F8F8 ;
 `;
 
@@ -90,13 +89,14 @@ const LectureList = ({ navigation }) => {
   }
 
   return (
-    <View insets={insets}>
+    <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm}/>
-        <Container>
+        <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
             <FlatList
               data={lectures}
               renderItem={({ item }) => <Item ContentsName={item.ContentsName} ProgressStep={item.ProgressStep} ProgressNum={item.ProgressNum} ProgressP={item.ProgressP} navigation={navigation} />}
               keyExtractor={item => item.id}
+              scrollEnabled={false}
               />
         </Container>
     </View>

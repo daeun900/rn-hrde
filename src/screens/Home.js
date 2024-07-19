@@ -9,7 +9,6 @@ import { UserContext } from "../context/userContext";
 
 const Container = styled.ScrollView`
   padding: 0 20px;
-  margin-bottom: 65px;
 `;
 
 const BigTxt = styled.Text`
@@ -116,9 +115,9 @@ const Home =  ({ navigation }) => {
     source={require("../../assets/main_bg.png")}  //이미지경로
     resizeMode="cover" // 'cover', 'contain', 'stretch', 'repeat', 'center' 중 선택 
     >
-    <View insets={insets}>
+    <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm}/>
-        <Container>
+        <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
             <CarouselBox style={{width:width}}>
                 <Carousel data={data} />
             </CarouselBox>
