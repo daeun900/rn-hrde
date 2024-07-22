@@ -81,10 +81,48 @@ const Lecture  = () => {
           <Stack.Screen
               name="CScenter"
               component={CScenter}
+              options={({navigation}) => ({     
+                title: '고객센터',
+                shadowOpacity: 0,
+                headerShadowVisible: false,
+                tabBarLabel: '고객센터',
+                headerLeft: () => (
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={{paddingLeft:20, marginRight:-10}}>
+                        <Feather name="arrow-left" size={24} color="black" />
+                    </TouchableOpacity>
+                  ),
+                  headerTitleAlign: 'left',
+              })}
           />
           <Stack.Screen
             name="FAQ"
             component={FAQ}
+          />
+         
+        </Stack.Navigator>
+   
+    );
+  };
+
+  const ETCcontainer = () => {
+
+    return (
+        <Stack.Navigator>
+          <Stack.Screen
+              name="Etc"
+              component={Etc}
+              options={({navigation}) => ({     
+                title: '기타',
+                shadowOpacity: 0,
+                headerShadowVisible: false,
+                tabBarLabel: '기타',
+                headerLeft: () => (
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={{paddingLeft:20, marginRight:-10}}>
+                        <Feather name="arrow-left" size={24} color="black" />
+                    </TouchableOpacity>
+                  ),
+                  headerTitleAlign: 'left',
+              })}
           />
          
         </Stack.Navigator>
@@ -144,7 +182,7 @@ const TabNav = () => {
                         unmountOnBlur: true
                 }}
             />
-            <Tab.Screen name="Etc" component={Etc}
+            <Tab.Screen name="Etc" component={ETCcontainer}
                  options={{
                     headerShown: false,
                     tabBarLabel: '기타',
