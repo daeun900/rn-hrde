@@ -102,7 +102,7 @@ const Num = styled.Text`
             <MidTxt style={{marginTop:10,textAlign:'center'}}>mOTP앱에서 조회되는 인증번호를 입력하세요.</MidTxt>
             <InputWrap>
                 <Input placeholder="인증번호를 입력하세요"></Input>
-                <SubmitBtn><MidTxt style={{color:'#fff'}}>인증하기</MidTxt></SubmitBtn>
+                <SubmitBtn><MidTxt style={{color:'#fff'}} onPress={() => navigation.navigate("LecturePlayer", { ContentsName })}>인증하기</MidTxt></SubmitBtn>
             </InputWrap>
             <SmallTxt>*mOTP외 다른 방법을 원하시는 분은 아래 대체인증을 눌러주세요</SmallTxt>
             <ButtonWrap>
