@@ -1,10 +1,11 @@
 import React from "react";
-import {Text, View,TouchableOpacity} from "react-native";
+import {Text, View,TouchableOpacity, Alert} from "react-native";
 import styled from "styled-components/native";
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useLectureContext } from "../context/lectureContext";
 import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons, Octicons } from '@expo/vector-icons';
 
 const TopTxt = styled.View`
   width: 100%;
@@ -32,19 +33,49 @@ const Name = styled.View`
   align-items: center;
 `;
 
-const LogoutBtn = styled.TouchableOpacity`
-  display: flex;
+const BtnWrap = styled.View`
   flex-direction: row;
-  border: 1px solid #888;
-  padding:5px 13px;
-  border-radius: 20px;
-  color: #747474;
+`
+const LogoutBtn = styled.TouchableOpacity`
+  padding:8px ;
 `;
 
+const NoticeBtn = styled.TouchableOpacity`
+  padding:8px ;
+  position: relative;
+`; 
+const On = styled.View`
+position: absolute;
+top: 5px;
+right: 2px;
+width: 7px;
+height: 7px;
+border-radius: 50%;
+background-color: #F70101;
+`
 
 const TopSec = ({name}) => {
   const { clearLectures } = useLectureContext();
   const navigation = useNavigation();
+
+  const confirmLogout = () => {
+    Alert.alert(
+      '로그아웃',
+      '로그아웃 하시겠습니까?',
+      [
+        {
+          text: '취소',
+          onPress: () => console.log('로그아웃 취소'),
+          style: 'cancel',
+        },
+        {
+          text: '확인',
+          onPress: removeData, 
+        },
+      ],
+      { cancelable: false }
+    );
+  }
 
   const removeData = async () => {
     try {
@@ -59,15 +90,22 @@ const TopSec = ({name}) => {
       console.error('Error removing data:', error);
     }
   }
+
     return (
       <TopTxt>
         <Name>
           <BigTxt style={{ fontWeight: 600, marginRight:3}}>{name}</BigTxt>
           <SmallTxt>님</SmallTxt>
         </Name>
-        <LogoutBtn onPress={removeData}>
-          <MidTxt>로그아웃</MidTxt>
-        </LogoutBtn>
+        <BtnWrap>
+          <LogoutBtn onPress={confirmLogout}>
+            <MaterialIcons name="logout" size={24} color="black" />
+          </LogoutBtn>
+          <NoticeBtn onPress={() => navigation.navigate("Notification")}>
+            <Octicons name="bell" size={24} color="black" />
+            <On></On>
+          </NoticeBtn>
+        </BtnWrap>
       </TopTxt>
     );
 };

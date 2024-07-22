@@ -1,7 +1,9 @@
 import React, {useContext} from "react";
+import { TouchableOpacity } from "react-native";
 import { ThemeContext } from "styled-components/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Start, Signin, Home } from "../screens";
+import { Start, Signin, Notification } from "../screens";
+import {Feather} from '@expo/vector-icons'
 import TabNav from "./Tab";
 
 const Stack = createStackNavigator();
@@ -27,9 +29,9 @@ const Auth = () => {
         name="Tab"
         component={TabNav}
         options={{headerShown: false,          
-          unmountOnBlur: true }}
-      >
-      </Stack.Screen>
+        unmountOnBlur: true }}
+      />
+ 
     </Stack.Navigator>
   );
 };

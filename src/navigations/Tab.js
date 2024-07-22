@@ -3,7 +3,7 @@ import { Image, TouchableOpacity, Text } from "react-native";
 import { ThemeContext } from "styled-components/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home, Etc,LectureList, LectureDetail, LectureCerti,LecturePlayer, CScenter, FAQ } from "../screens";
+import { Home, Etc,LectureList, LectureDetail, LectureCerti,LecturePlayer, CScenter, FAQ, Notification } from "../screens";
 import {Feather} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 
@@ -68,22 +68,7 @@ const Lecture  = () => {
                 headerTitleAlign: 'left',
                 })}
             />
-              <Stack.Screen
-                name="LecturePlayer"
-                component={LecturePlayer}
-                options={({navigation}) => ({  
-                    title: '나의 학습실',
-                    shadowOpacity: 0,
-                    headerShadowVisible: false,
-                    tabBarLabel: '나의 학습실',
-                    headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.pop()} style={{paddingLeft: 20, marginRight:-10}}>
-                            <Feather name="arrow-left" size={24} color="black" />
-                        </TouchableOpacity>
-                    ),
-                    headerTitleAlign: 'left',
-                    })}
-            />
+           
         </Stack.Navigator>
    
     );
@@ -121,7 +106,6 @@ const TabNav = () => {
         >
             <Tab.Screen name="Home" component={Home} 
                 options={{
-                    
                     headerTitle:props => (   <Image   style={{ width: 158, height: 24}} source={require('../../assets/logo.png')}/>),
                     headerTitleAlign: "center",
                     shadowOpacity: 0,
@@ -171,7 +155,23 @@ const TabNav = () => {
                         unmountOnBlur: true
                 }}
             />
-         
+              <Stack.Screen
+                name="Notification"
+                component={Notification}
+                options={({navigation}) => ({ 
+                tabBarButton: () => null,
+                title: '알림',
+                shadowOpacity: 0,
+                headerShadowVisible: false,
+                tabBarLabel: '알림',
+                headerLeft: () => (
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={{paddingLeft: 20, marginRight:-10}}>
+                        <Feather name="arrow-left" size={24} color="black" />
+                    </TouchableOpacity>
+                ),
+                headerTitleAlign: 'left',
+                })}
+            />
         </Tab.Navigator>
     )
 }
