@@ -21,7 +21,11 @@ const CarouselItem = styled.Image`
 `;
 
 const Carousel = ({data}) => {
-  const [newData] = useState([{key:'spacer-left'}, ...data, {key:'spacer-right'}])
+  const [newData] = useState([
+    {key: 'spacer-left'}, 
+    ...data.map((item, index) => ({ ...item, key: `item-${index}` })), 
+    {key: 'spacer-right'}
+  ]);
 
   const {width} = useWindowDimensions();
   const SIZE = width * .9;
