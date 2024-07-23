@@ -116,7 +116,7 @@ const Home =  ({ navigation }) => {
     resizeMode="cover" // 'cover', 'contain', 'stretch', 'repeat', 'center' 중 선택 
     >
     <View insets={insets} style={{flex:1}}>
-        <TopSec name={userNm}/>
+        <TopSec name={userNm} borderBottomWidth="0px"/>
         <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
             <CarouselBox style={{width:width}}>
                 <Carousel data={data} />

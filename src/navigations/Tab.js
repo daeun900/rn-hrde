@@ -68,7 +68,22 @@ const Lecture  = () => {
                 headerTitleAlign: 'left',
                 })}
             />
-           
+            <Stack.Screen
+            name="LecturePlayer"
+            component={LecturePlayer}
+            options={({navigation}) => ({  
+                title: '나의 학습실',
+                shadowOpacity: 0,
+                headerShadowVisible: false,
+                tabBarLabel: '나의 학습실',
+                headerLeft: () => (
+                    <TouchableOpacity onPress={() => navigation.pop()} style={{paddingLeft: 20, marginRight:-10}}>
+                        <Feather name="arrow-left" size={24} color="black" />
+                    </TouchableOpacity>
+                ),
+                headerTitleAlign: 'left',
+                })}
+            />
         </Stack.Navigator>
    
     );
@@ -171,7 +186,7 @@ const TabNav = () => {
                         unmountOnBlur: true
                 }}
             />
-            <Tab.Screen name="CScenter" component={CScontainer}
+            <Tab.Screen name="CScontainer" component={CScontainer}
                  options={{
                     headerShown: false,
                     tabBarLabel: '고객센터',
@@ -182,7 +197,7 @@ const TabNav = () => {
                         unmountOnBlur: true
                 }}
             />
-            <Tab.Screen name="Etc" component={ETCcontainer}
+            <Tab.Screen name="ETCcontainer" component={ETCcontainer}
                  options={{
                     headerShown: false,
                     tabBarLabel: '기타',

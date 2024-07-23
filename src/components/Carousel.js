@@ -21,7 +21,11 @@ const CarouselItem = styled.Image`
 `;
 
 const Carousel = ({data}) => {
-  const [newData] = useState([{key:'spacer-left'}, ...data, {key:'spacer-right'}])
+  const [newData] = useState([
+    {key: 'spacer-left'}, 
+    ...data.map((item, index) => ({ ...item, key: `item-${index}` })), 
+    {key: 'spacer-right'}
+  ]);
 
   const {width} = useWindowDimensions();
   const SIZE = width * .9;
@@ -40,10 +44,10 @@ const Carousel = ({data}) => {
         <Row>
           {newData.map((item, index) => {
             if (!item.image){
-              return<View style={{width:SPACER}}/>
+              return<View key={item.key} style={{width:SPACER}}/>
             }
             return (
-              <CarouselItemContainer width={SIZE}  key={index} >
+              <CarouselItemContainer key={item.key} width={SIZE}  >
                 <CarouselItem source={item.image}/>
               </CarouselItemContainer>
             );
