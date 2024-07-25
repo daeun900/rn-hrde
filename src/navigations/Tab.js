@@ -250,8 +250,8 @@ const ETCcontainer = () => {
                     headerShadowVisible: false,
                     tabBarLabel: '공지사항',
                     headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
-                            <Feather name="x" size={24} color="black" />
+                        <TouchableOpacity onPress={() => navigation.pop()} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="arrow-left" size={24} color="black" />
                         </TouchableOpacity>
                     ),
                 })}
@@ -265,8 +265,8 @@ const ETCcontainer = () => {
                     headerShadowVisible: false,
                     tabBarLabel: '공지사항',
                     headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
-                            <Feather name="x" size={24} color="black" />
+                        <TouchableOpacity onPress={() => navigation.pop()} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="arrow-left" size={24} color="black" />
                         </TouchableOpacity>
                     ),
                 })}
@@ -280,8 +280,8 @@ const ETCcontainer = () => {
                     headerShadowVisible: false,
                     tabBarLabel: '자주묻는 질문',
                     headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
-                            <Feather name="x" size={24} color="black" />
+                        <TouchableOpacity onPress={() => navigation.pop()} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="arrow-left" size={24} color="black" />
                         </TouchableOpacity>
                     ),
                 })}
@@ -295,8 +295,8 @@ const ETCcontainer = () => {
                     headerShadowVisible: false,
                     tabBarLabel: '자주묻는 질문',
                     headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
-                            <Feather name="x" size={24} color="black" />
+                        <TouchableOpacity onPress={() => navigation.pop()} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="arrow-left" size={24} color="black" />
                         </TouchableOpacity>
                     ),
                 })}
