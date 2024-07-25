@@ -87,14 +87,14 @@ const Etc =  ({ navigation }) => {
               <Image source={require('../../assets/etciconBig.png')}/>
               <BigTxt>좀 더 편리하게 사용하시도록{"\n"}도움 드릴게요</BigTxt>
            </TopWrap>
-           <Button style={styles.shadow}>
+           <Button style={styles.shadow} onPress={() => navigation.navigate("Notice")}>
               <ImgWrap><Image source={require('../../assets/etcicon1.png')}/></ImgWrap>
               <View>
                 <MidTxt>공지사항</MidTxt>
                 <SmallTxt>유용한 소식 놓치지 말고 확인하세요</SmallTxt>
               </View>
            </Button>
-           <Button style={styles.shadow}>
+           <Button style={styles.shadow} onPress={() => navigation.navigate("Faq")}>
               <ImgWrap><Image source={require('../../assets/etcicon2.png')}/></ImgWrap>
               <View>
                 <MidTxt>자주 묻는 질문</MidTxt>

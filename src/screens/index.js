@@ -17,7 +17,9 @@ import InquiryView from './InquiryView';
 //기타
 import Etc from './Etc';
 import Notice from './Notice';
-import FAQ from './FAQ';
+import NoticeView from './NoticeView';
+import Faq from './Faq';
+import FaqList from './FaqList';
 
 
-export {Start, Signin, Home, Notification, LectureList,LectureDetail,LectureCerti,LecturePlayer, CScenter,Inquiry,InquirySubmit,InquiryComplete,InquiryView, Etc, Notice, FAQ};
+export {Start, Signin, Home, Notification, LectureList,LectureDetail,LectureCerti,LecturePlayer, CScenter,Inquiry,InquirySubmit,InquiryComplete,InquiryView, Etc, Notice, NoticeView,Faq,FaqList};

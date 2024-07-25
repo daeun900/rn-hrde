@@ -1,10 +1,10 @@
-import React,{useContext} from "react";
+ import React,{useContext} from "react";
 import { Image, TouchableOpacity, Text } from "react-native";
 import { ThemeContext } from "styled-components/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Home, Etc, LectureList, LectureDetail, LectureCerti, LecturePlayer, CScenter, Inquiry, InquiryComplete, FAQ, Notification } from "../screens";
+import { Home, Etc, LectureList, LectureDetail, LectureCerti, LecturePlayer, CScenter, Inquiry, InquiryComplete, Notification,Notice,NoticeView, Faq, FaqList } from "../screens";
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import PagerView from 'react-native-pager-view';
@@ -196,11 +196,10 @@ const CScontainer = () => {
                     headerShadowVisible: false,
                     tabBarLabel: '1:1문의',
                     headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.goBack()} style={{ paddingLeft: 20, marginRight: -10 }}>
-                            <Feather name="arrow-left" size={24} color="black" />
+                        <TouchableOpacity onPress={() => navigation.navigate('CScenter')} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="x" size={24} color="black" />
                         </TouchableOpacity>
                     ),
-                    headerTitleAlign: 'left',
                 })}
             />
             <Stack.Screen
@@ -212,11 +211,10 @@ const CScontainer = () => {
                     headerShadowVisible: false,
                     tabBarLabel: '1:1문의',
                     headerLeft: () => (
-                        <TouchableOpacity onPress={() => navigation.goBack()} style={{ paddingLeft: 20, marginRight: -10 }}>
-                            <Feather name="arrow-left" size={24} color="black" />
+                        <TouchableOpacity onPress={() => navigation.navigate('CScenter')} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="x" size={24} color="black" />
                         </TouchableOpacity>
                     ),
-                    headerTitleAlign: 'left',
                 })}
             />
         </Stack.Navigator>
@@ -241,6 +239,66 @@ const ETCcontainer = () => {
                         </TouchableOpacity>
                     ),
                     headerTitleAlign: 'left',
+                })}
+            />
+              <Stack.Screen
+                name="Notice"
+                component={Notice}
+                options={({ navigation }) => ({     
+                    title: '공지사항',
+                    shadowOpacity: 0,
+                    headerShadowVisible: false,
+                    tabBarLabel: '공지사항',
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="x" size={24} color="black" />
+                        </TouchableOpacity>
+                    ),
+                })}
+            />
+                <Stack.Screen
+                name="NoticeView"
+                component={NoticeView}
+                options={({ navigation }) => ({     
+                    title: '공지사항',
+                    shadowOpacity: 0,
+                    headerShadowVisible: false,
+                    tabBarLabel: '공지사항',
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="x" size={24} color="black" />
+                        </TouchableOpacity>
+                    ),
+                })}
+            />
+              <Stack.Screen
+                name="Faq"
+                component={Faq}
+                options={({ navigation }) => ({     
+                    title: '자주묻는 질문',
+                    shadowOpacity: 0,
+                    headerShadowVisible: false,
+                    tabBarLabel: '자주묻는 질문',
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="x" size={24} color="black" />
+                        </TouchableOpacity>
+                    ),
+                })}
+            />
+                  <Stack.Screen
+                name="FaqList"
+                component={FaqList}
+                options={({ navigation }) => ({     
+                    title: '자주묻는 질문',
+                    shadowOpacity: 0,
+                    headerShadowVisible: false,
+                    tabBarLabel: '자주묻는 질문',
+                    headerLeft: () => (
+                        <TouchableOpacity onPress={() => navigation.navigate('Etc')} style={{ paddingLeft: 20, marginRight: -10 }}>
+                            <Feather name="x" size={24} color="black" />
+                        </TouchableOpacity>
+                    ),
                 })}
             />
         </Stack.Navigator>
