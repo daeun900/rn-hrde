@@ -86,7 +86,10 @@ const TopSec = ({ name, borderBottomWidth }) => {
       console.log('로그아웃 진행 후 userNm 값 : ', await AsyncStorage.getItem('userNm'));
       console.log('로그아웃 진행 후 userId 값 : ', await AsyncStorage.getItem('userId'));
       clearLectures();
-      navigation.popToTop();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Start' }]
+      });
     } catch (error) {
       console.error('Error removing data:', error);
     }

@@ -40,7 +40,7 @@ const Start = ({ navigation }) => {
       >
       <Container insets={insets}>
         <LogoImg source={require('../../assets/logo.png')}/>
-        <Button title="로그인"  containerStyle={{borderRadius: 50}}  onPress={() => navigation.navigate("Signin")}/>
+        <Button title="로그인"  containerStyle={{borderRadius: 50}}  backgroundColor="#008DF3"  onPress={() => navigation.navigate("Signin")}/>
         <SmallTxt>
           회원이 아니신 경우 PC에서 회원가입 후 이용해주세요
         </SmallTxt>

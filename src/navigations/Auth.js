@@ -27,9 +27,8 @@ const Auth = () => {
       />
       <Stack.Screen
         name="Tab"
-        component={TabNav}
-        options={{headerShown: false,          
-        unmountOnBlur: true }}
+        component={TabNav} 
+        options={{headerShown: false}}
       />
  
     </Stack.Navigator>

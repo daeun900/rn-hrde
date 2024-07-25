@@ -129,7 +129,10 @@ const Signin = ({navigation}) => {
         isPassword={true}
         onSubmitEditing={_handleSigninBtnPress}
       />
-      <Button title="로그인"  containerStyle={{borderRadius: 10}} onPress={() => login() } />
+      <Button title="로그인"  
+      containerStyle={{borderRadius: 10}} 
+      backgroundColor="#008DF3"
+      onPress={() => login() } />
   
     </Container>
   );

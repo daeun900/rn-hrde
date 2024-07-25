@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import PropTypes from 'prop-types';
 
 const Container = styled.View`
-    background-color: #008DF3;
+     background-color: ${({ backgroundColor }) => backgroundColor || '#008DF3'};
     padding: 20px;
     margin-top: 20px;
     flex: 1;
@@ -17,10 +17,10 @@ const Title = styled.Text`
     color: ${({theme})=> theme.btnTitle};
 `;
 
-const Button = ({title, onPress, containerStyle, textStyle })=> {
+const Button = ({title, onPress, containerStyle, textStyle, backgroundColor })=> {
     return (
-        <TouchableOpacity onPress={onPress} style={{flexDirection:'row'}}>
-            <Container style={containerStyle}>
+        <TouchableOpacity onPress={onPress} style={{flexDirection:'row', ...containerStyle}}>
+            <Container style={{ ...containerStyle }} backgroundColor={backgroundColor}>
                 <Title style={textStyle}>
                     {title}
                 </Title>

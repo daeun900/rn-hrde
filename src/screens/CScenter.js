@@ -1,5 +1,5 @@
 import React, { useEffect , useContext} from "react";
-import { StyleSheet, Platform,Text, View, Image, useWindowDimensions, ImageBackground, ScrollView} from "react-native";
+import { StyleSheet, Platform,Text,View, Image, Linking, ImageBackground, Alert} from "react-native";
 import styled from "styled-components/native";
 import { TopSec} from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -74,6 +74,23 @@ const CSCenter =  ({ navigation }) => {
     updateUserNm();
   }, []);
 
+  //전화연결
+  const handleCall = (phoneNumber) => {
+    const url = `tel:${phoneNumber}`;
+    Linking.openURL(url).catch(err => {
+      console.error("Failed to make a call", err);
+      Alert.alert("오류", "전화 연결에 실패했습니다.");
+    });
+  };
+
+  //카톡연결
+  const handleLinkOpen = (url) => {
+    Linking.openURL(url).catch(err => {
+      console.error("Failed to open URL", err);
+      Alert.alert("오류", "링크를 여는 데 실패했습니다.");
+    });
+  };
+
   return (
     <ImageBackground 
     style={{ width: "100%", height: "100%" }}  //View를 꽉채우도록
@@ -88,21 +105,21 @@ const CSCenter =  ({ navigation }) => {
               <BigTxt>무엇을 도와드릴까요?</BigTxt>
               <MidTxt>고객님과의 빠르고 정확한 상담을 약속합니다.</MidTxt>
            </TopWrap>
-           <Button style={styles.shadow}>
+           <Button style={styles.shadow} onPress={() => handleCall('0312174002')}>
               <ImgWrap><Image source={require('../../assets/csicon1.png')}/></ImgWrap>
               <View>
                 <MidTxt>전화 연결</MidTxt>
                 <SmallTxt>031-217-4002로 전화를 연결 합니다.</SmallTxt>
               </View>
            </Button>
-           <Button style={styles.shadow}>
+           <Button style={styles.shadow} onPress={() => handleLinkOpen('https://pf.kakao.com/_kEcWxj/chat')}>
               <ImgWrap><Image source={require('../../assets/csicon2.png')}/></ImgWrap>
               <View>
                 <MidTxt>카카오톡 상담</MidTxt>
                 <SmallTxt>카카오톡을 통해 상담해 드립니다.</SmallTxt>
               </View>
            </Button>
-           <Button style={styles.shadow}>
+           <Button style={styles.shadow} onPress={() => navigation.navigate("Inquiry")}>
               <ImgWrap><Image source={require('../../assets/csicon3.png')}/></ImgWrap>
               <View>
                 <MidTxt>1:1 문의</MidTxt>
