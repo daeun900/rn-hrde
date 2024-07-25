@@ -1,7 +1,7 @@
-import React, { useEffect , useContext, useState} from "react";
-import { StyleSheet, Platform,Text, View, Image, useWindowDimensions, ScrollView,FlatList} from "react-native";
+import React, { useEffect, useContext, useState } from "react";
+import { StyleSheet, Platform, Text, View, Image, useWindowDimensions, ScrollView, FlatList } from "react-native";
 import styled from "styled-components/native";
-import { TopSec} from "../components";
+import { TopSec } from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { UserContext } from "../context/userContext";
 import { Entypo } from '@expo/vector-icons';
@@ -10,36 +10,40 @@ import axios from 'axios';
 const Container = styled.View`
   flex: 1;
   background-color:#fff;
-`
+`;
 const FlexBox = styled.View`
   flex-direction: row;
-`
+`;
 const MidTxt = styled.Text`
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 10px;
-`
+  color: ${(props) => (props.isNotiInfo1 ? '#008DF3' : '#000')}; /* 텍스트 색상 변경 */
+`;
 const SmallTxt = styled.Text`
   font-size: 14px;
   line-height: 20px;
   color: #767676;
-`
+`;
 const NoticeWrap = styled.TouchableOpacity`
   padding: 20px;
   padding-right: 40px;
   border-bottom-width: 1px;
   border-color: #DEDEDE;
   position: relative;
-`
+`;
 const Icon = styled.View`
   position: absolute;
   right: 10px;
   top: 50%;
   margin-top: 10px;
-`
-const Item = ({ title, date, views,idx, navigation }) => (
-  <NoticeWrap onPress={() => navigation.navigate("NoticeView",{idx})}>
-    <MidTxt>{title}</MidTxt>
+`;
+
+const Item = ({ title, date, views, idx, isNotiInfo1, navigation }) => (
+  <NoticeWrap onPress={() => navigation.navigate("NoticeView", { idx })}>
+   <MidTxt isNotiInfo1={isNotiInfo1}>
+      {isNotiInfo1 ? `[공지] ${title}` : title}
+    </MidTxt>
     <FlexBox>
       <SmallTxt>{date}</SmallTxt>
       <SmallTxt style={{ marginHorizontal: 5 }}>ㅣ</SmallTxt>
@@ -59,16 +63,25 @@ const Notice = ({ navigation }) => {
   useEffect(() => {
     updateUserNm();
 
-    // 서버에서 데이터 가져오기
+    // 서버에서 데이터 가져오기(공지)
     axios.post('http://new.hrdeedu.com/mobileTest/notice_list.php')
       .then(response => {
-        const formattedData = response.data.notiInfo.map((item) => ({
+        const notiInfo1Data = response.data.notiInfo1.map((item) => ({
           title: item[0],
           date: item[1],
           views: item[2],
-          idx: item[3]
+          idx: item[3],
+          isNotiInfo1: true
         }));
-        setData(formattedData);
+
+        const notiInfo2Data = response.data.notiInfo2.map((item) => ({
+          title: item[0],
+          date: item[1],
+          views: item[2],
+          idx: item[3],
+          isNotiInfo1: false
+        }));
+        setData([...notiInfo1Data, ...notiInfo2Data]);
       })
       .catch(error => {
         console.error(error);
@@ -76,7 +89,7 @@ const Notice = ({ navigation }) => {
   }, []);
 
   const renderItem = ({ item }) => (
-    <Item title={item.title} date={item.date} views={item.views} idx={item.idx} navigation={navigation} />
+    <Item title={item.title} date={item.date} views={item.views} idx={item.idx} isNotiInfo1={item.isNotiInfo1} navigation={navigation} />
   );
 
   return (
