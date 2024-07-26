@@ -52,7 +52,7 @@ const QIcon = styled.View`
   background-color: #111;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 50px;
   justify-content: center;
   align-items: center;
   margin-right: 15px;
@@ -76,7 +76,7 @@ const AIcon = styled.View`
   background-color: #008DF3;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 50px;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -156,7 +156,7 @@ setWebViewHeight(Number(event.nativeEvent.data));
             originWhitelist={['*']}
             source={{ html: answer }}
             injectedJavaScript={injectJavaScript}
-            style={{ height: webViewHeight -100 }}
+            style={{ height: webViewHeight}}
             onMessage={onWebViewMessage}
           />
         </AnswerContainer>

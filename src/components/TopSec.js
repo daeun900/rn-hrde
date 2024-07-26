@@ -51,7 +51,7 @@ const On = styled.View`
   right: 2px;
   width: 7px;
   height: 7px;
-  border-radius: 50%;
+  border-radius: 50px;
   background-color: #F70101;
 `;
 
