@@ -5,6 +5,7 @@ import { TopSec} from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { UserContext } from "../context/userContext";
 import { Fontisto } from '@expo/vector-icons';
+import axios from 'axios';
 
 const Container = styled.ScrollView`
   padding: 0 20px;
@@ -60,11 +61,53 @@ const Category = styled.TouchableOpacity`
 const Faq =  ({ navigation }) => {
   const insets = useSafeAreaInsets(); //아이폰 노치 문제 해결
   const { userNm, updateUserNm  } = useContext(UserContext);
+  const [search, setSearch] = useState('');
+  const [faqArray, setFaqArray] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
     updateUserNm();
+    fetchFaqs();
   }, []);
 
-  const [search, setSearch] = useState('');
+  //카테고리 가져오기
+  const fetchFaqs = async () => {
+    try {
+      const response = await axios.get('http://new.hrdeedu.com/mobileTest/faq_array.php'); 
+      setFaqArray(response.data.faqArray);
+      console.log(faqArray)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //검색기능
+  const searchFaqs = async () => {
+    try {
+      const response = await axios.post('http://new.hrdeedu.com/mobileTest/faq_list.php', {
+        searchedWord: search,
+        type: 'S'
+      });
+      setSearchResults(response.data.faqInfo);
+      navigation.navigate('FaqList', { results: response.data.faqInfo });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //질문리스트 가져오기
+  const fetchCategoryFaqs = async (category) => {
+    try {
+      const response = await axios.post('http://new.hrdeedu.com/mobileTest/faq_list.php', {
+        category: category,
+        type: 'C'
+      });
+      navigation.navigate('FaqList', { results: response.data.faqInfo });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm}/>
@@ -75,28 +118,19 @@ const Faq =  ({ navigation }) => {
               placeholder="궁금한 것을 빠르게 검색해보세요"
               value={search}
               onChangeText={setSearch}
+              onSubmitEditing={searchFaqs}
             />
           </SearchContainer>
           <BigTxt>카테고리에서 찾기</BigTxt>
           <CatagoryWrap>
-            <Category onPress={() => navigation.navigate("FaqList")}>
+            <Category onPress={() => fetchCategoryFaqs('T')}>
               <MidTxt>전체</MidTxt>
             </Category>
-            <Category>
-              <MidTxt>국민내일배움카드</MidTxt>
+          {faqArray.map((item, index) => (
+            <Category key={index}  onPress={() => fetchCategoryFaqs(item[0])}>
+              <MidTxt>{item[1]}</MidTxt>
             </Category>
-            <Category>
-              <MidTxt>평생교육바우처</MidTxt>
-            </Category>
-            <Category>
-              <MidTxt>학습장애</MidTxt>
-            </Category>
-            <Category>
-              <MidTxt>증명서 발급</MidTxt>
-            </Category>
-            <Category>
-              <MidTxt>사업주훈련</MidTxt>
-            </Category>
+          ))}
           </CatagoryWrap>
         </Container>
       </View>

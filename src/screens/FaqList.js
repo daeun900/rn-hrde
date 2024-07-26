@@ -1,10 +1,12 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useRef } from "react";
 import { StyleSheet, Platform, Text, View, Image, Linking, ImageBackground, Alert } from "react-native";
 import styled from "styled-components/native";
 import { TopSec } from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { UserContext } from "../context/userContext";
 import { Entypo } from '@expo/vector-icons';
+import { WebView } from 'react-native-webview';
+import axios from 'axios';
 
 const Container = styled.ScrollView`
   flex: 1;
@@ -88,14 +90,44 @@ const NullContainer = styled.View`
   justify-content: center;
 `;
 
-const data = [
-  { category:'회원가입' ,question: '강의가 안나와요', answer: '수강신청한 강의가 강의목록에 없네' },
-  { category:'학습' ,question: '수강신청한 강의가 강의목록에 없네요수강신청한 강의가 강의목록에 없네요' ,answer: '군인은 현역을 면한 후가 아니면 국무위원으로 임명될 수 없다. 정당은 그 목적·조직과 활동이 민주적이어야 하며, 국민의 정치적 의사형성에 참여하는데 필요한 조직을 가져야 한다. 모든 국민은 주거의 자유를 침해받지 아니한다. 의원을 제명하려면 국회재적의원 3분의 2 이상의 찬성이 있어야 한다. 모든 국민은 신속한 재판을 받을 권리를 가진다. 형사피고인은 상당한 이유가 없는 한 지체없이 공개재판을 받을 권리를 가진다.' },
-];
-
-const AccordionItem = ({ question, answer, category}) => {
+const AccordionItem = ({ question, idx, category}) => {
   const [expanded, setExpanded] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const [webViewHeight, setWebViewHeight] = useState(0); // WebView 높이 상태 추가
+  const webViewRef = useRef(null);
 
+  useEffect(() => {
+    if (expanded) {
+      fetchFaqDetail();
+    }
+  }, [expanded]); //expand가 될때만 실행
+
+  //답변 가져오기
+  const fetchFaqDetail = async () => {
+    try {
+      const response = await axios.post('http://new.hrdeedu.com/mobileTest/faq_detail.php', { idx });
+      setAnswer(response.data.content);
+    } catch (error) {
+      console.error("Error fetching FAQ detail:", error);
+    }
+  };
+
+// WebView CSS 수정
+const injectJavaScript = `
+const style = document.createElement('style');
+style.innerHTML = 'body { margin:0px; padding:0px; background-color:#F8F8F8; } img { max-width:100%; height:auto; } p { font-size:50px; margin:0px; padding:0px; }';
+document.head.appendChild(style);
+
+window.addEventListener('load', () => {
+  window.ReactNativeWebView.postMessage(document.body.offsetHeight);
+});
+`;
+
+
+// WebView 높이 계산
+const onWebViewMessage = (event) => {
+setWebViewHeight(Number(event.nativeEvent.data));
+};
 
   return (
     <ItemContainer>
@@ -119,35 +151,62 @@ const AccordionItem = ({ question, answer, category}) => {
       {expanded && (
         <AnswerContainer>
           <AIcon><BigTxt>A</BigTxt></AIcon>
-          <MidTxt>{answer}</MidTxt>
+          <WebView 
+            ref={webViewRef}
+            originWhitelist={['*']}
+            source={{ html: answer }}
+            injectedJavaScript={injectJavaScript}
+            style={{ height: webViewHeight -100 }}
+            onMessage={onWebViewMessage}
+          />
         </AnswerContainer>
       )}
     </ItemContainer>
   );
 };
 
-const FaqList = ({ navigation }) => {
+const FaqList = ({ route}) => {
   const insets = useSafeAreaInsets(); // 아이폰 노치 문제 해결
   const { userNm, updateUserNm  } = useContext(UserContext);
+  const { results = [] } = route.params || {}; // 기본값(undefined)을 빈 배열로 설정
+  const [faqArray, setFaqArray] = useState([]);
+
   useEffect(() => {
+    fetchFaqs();
     updateUserNm();
   }, []);
+
+  //카테고리명 가져오기
+  const fetchFaqs = async () => {
+    try {
+      const response = await axios.get('http://new.hrdeedu.com/mobileTest/faq_array.php');
+      setFaqArray(response.data.faqArray);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getCategoryName = (categoryCode) => {
+    const category = faqArray.find(item => item[0] === categoryCode);
+    return category ? category[1] : categoryCode;
+  };
+
   return (
     <View insets={insets} style={{ flex: 1 }}>
       <TopSec name={userNm}/>
-      {data.length === 0 ? (
+      {results.length === 0 ? (
         <NullContainer>
           <Image source={require('../../assets/icon_null.png')} style={{ marginBottom: 20 }} />
-          <MidTxt>문의내역이 없습니다</MidTxt>
+          <MidTxt>등록된 질문이 없습니다</MidTxt>
         </NullContainer>
       ) : (
         <Container contentContainerStyle={{ paddingBottom: insets.bottom }}>
-          {data.map((item, index) => (
+          {results.map((item) => (
             <AccordionItem
-              key={index}
-              question={item.question}
-              answer={item.answer}
-              category={item.category}
+              key={item[0]}
+              idx={item[0]}  
+              question={item[1]}
+              category={getCategoryName(item[2])} //카테고리명 가져오기
             />
           ))}
         </Container>
