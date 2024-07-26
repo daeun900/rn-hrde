@@ -10,7 +10,7 @@ import axios from 'axios';
 const Container = styled.ScrollView`
   padding: 0 20px;
   flex:1;
-  background-color: #fff;
+  background-color: #ffffff;
 `;
 
 const BigTxt = styled.Text`

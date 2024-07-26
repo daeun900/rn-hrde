@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const Container = styled.ScrollView`
   flex: 1;
-  background-color: #fff;
+  background-color: #ffffff;
 `;
 
 const FlexBox = styled.View`
