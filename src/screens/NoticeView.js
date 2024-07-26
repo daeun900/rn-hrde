@@ -119,6 +119,7 @@ const NoticeView = ({ route}) => {
             </FlexBox>
           )}
            <WebView 
+            nestedScrollEnabled
             ref={webViewRef}
             originWhitelist={['*']}
             source={{ html: notice.content }}

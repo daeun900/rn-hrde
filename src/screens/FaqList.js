@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
-import { StyleSheet, Platform, Text, View, Image, Linking, ImageBackground, Alert } from "react-native";
+import { StyleSheet, Platform, Text, View, Image, Dimensions  } from "react-native";
 import styled from "styled-components/native";
 import { TopSec } from "../components";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { UserContext } from "../context/userContext";
 import { Entypo } from '@expo/vector-icons';
-import { WebView } from 'react-native-webview';
+import RenderHTML from 'react-native-render-html';
 import axios from 'axios';
 
 const Container = styled.ScrollView`
@@ -93,8 +93,6 @@ const NullContainer = styled.View`
 const AccordionItem = ({ question, idx, category}) => {
   const [expanded, setExpanded] = useState(false);
   const [answer, setAnswer] = useState("");
-  const [webViewHeight, setWebViewHeight] = useState(0); // WebView 높이 상태 추가
-  const webViewRef = useRef(null);
 
   useEffect(() => {
     if (expanded) {
@@ -112,22 +110,7 @@ const AccordionItem = ({ question, idx, category}) => {
     }
   };
 
-// WebView CSS 수정
-const injectJavaScript = `
-const style = document.createElement('style');
-style.innerHTML = 'body { margin:0px; padding:0px; background-color:#F8F8F8; } img { max-width:100%; height:auto; } p { font-size:50px; margin:0px; padding:0px; }';
-document.head.appendChild(style);
-
-window.addEventListener('load', () => {
-  window.ReactNativeWebView.postMessage(document.body.offsetHeight);
-});
-`;
-
-
-// WebView 높이 계산
-const onWebViewMessage = (event) => {
-setWebViewHeight(Number(event.nativeEvent.data));
-};
+  const contentWidth = Dimensions.get('window').width;
 
   return (
     <ItemContainer>
@@ -151,13 +134,9 @@ setWebViewHeight(Number(event.nativeEvent.data));
       {expanded && (
         <AnswerContainer>
           <AIcon><BigTxt>A</BigTxt></AIcon>
-          <WebView 
-            ref={webViewRef}
-            originWhitelist={['*']}
+          <RenderHTML 
+            contentWidth={contentWidth} 
             source={{ html: answer }}
-            injectedJavaScript={injectJavaScript}
-            style={{ height: webViewHeight}}
-            onMessage={onWebViewMessage}
           />
         </AnswerContainer>
       )}

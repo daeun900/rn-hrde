@@ -143,17 +143,17 @@ const Home =  ({ navigation }) => {
                 <Image source={require('../../assets/main_icon1.png')}/>
                 <MidTxt>앱 사용방법</MidTxt>
             </SmallButton>
-            <SmallButton style={styles.shadow} activeOpacity={.8}>
+            <SmallButton style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("Faq")}>
                 <Image source={require('../../assets/main_icon2.png')}/>
                 <MidTxt>자주 묻는 질문</MidTxt>
             </SmallButton>
           </GridBtn>
-          <BigButton style={styles.shadow}>
+          <BigButton style={styles.shadow} onPress={() => navigation.navigate("Notice")}>
               <Image source={require('../../assets/main_icon3.png')}/>
               <MidTxt>공지사항 바로가기</MidTxt>
               <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
           </BigButton>
-          <BigButton style={styles.shadow}>
+          <BigButton style={styles.shadow} onPress={() => navigation.navigate("CScenter")}>
               <Image source={require('../../assets/main_icon4.png')}/>
               <MidTxt>고객센터 바로가기</MidTxt>
               <MaterialIcons name="arrow-forward-ios" size={18} color="black" />
