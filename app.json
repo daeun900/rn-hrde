@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "rn-hrde",
+    "name": "hrde",
     "slug": "rn-hrde",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,12 +16,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     }
   }
 }

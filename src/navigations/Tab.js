@@ -36,7 +36,7 @@ const TabNav = () => {
         >
             <Tab.Screen name="Home" component={Home} 
                 options={{
-                    headerTitle: props => (<Image style={{ width: 158, height: 24 }} source={require('../../assets/logo.png')} />),
+                    headerTitle: props => (<Image style={{ width: 158, height: 28 }} source={require('../../assets/logo.png')} />),
                     headerTitleAlign: "center",
                     shadowOpacity: 0,
                     headerShadowVisible: false,

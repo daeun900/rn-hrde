@@ -129,9 +129,7 @@ const Home =  ({ navigation }) => {
                         <BigTxt style={{ fontWeight: 600, marginRight:3}}>{userNm}</BigTxt>
                         <SmallTxt>님</SmallTxt>
                     </Name>
-                    <SmallTxt style={{fontSize:13
-
-                    }}>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>
+                    <SmallTxt style={{fontSize:13}}>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>
                   </View>
               </FlexBox>
               <View style={{width:'100%', backgroundColor:'#rgba(255,255,255,.5)', paddingVertical: 13, borderRadius: 26}}>
