@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         }
         },
         android: {
-          elevation: 3
+          elevation: 2
         }
       })
     }
@@ -91,7 +91,7 @@ const LectureList = ({ navigation }) => {
   return (
     <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm}/>
-        <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
+        <Container contentContainerStyle={{ paddingBottom: insets.bottom + 20}}>
             <FlatList
               data={lectures}
               renderItem={({ item }) => <Item ContentsName={item.ContentsName} ProgressStep={item.ProgressStep} ProgressNum={item.ProgressNum} Chapter={item.Chapter} ProgressP={item.ProgressP} navigation={navigation} />}

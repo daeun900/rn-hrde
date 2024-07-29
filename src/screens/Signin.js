@@ -19,13 +19,15 @@ const Container = styled.Pressable`
 `;
  
 const LogoImg = styled.Image`
+width: 190px;
+height: 35px;
 margin-top: 50px;
 ` 
 
 const BigTxt =styled.Text`
 font-size:20px;
 font-weight: 500;
-margin-top: 40px;
+margin-top: 30px;
 `
 
 const SmallTxt = styled.Text`

@@ -12,14 +12,14 @@ const Container = styled.ScrollView`
 const BigTxt = styled.Text`
   font-size: 20px;
   line-height: 30px;
-  font-weight: 900;
+  font-weight: 800;
   margin-top: 20px;
   text-align: center;
 `
 const MidTxt = styled.Text`
   font-size: 16px;
   line-height: 24px;
-  font-weight: 900;
+  font-weight: 800;
 `
 const SmallTxt = styled.Text`
   font-size: 14px;
@@ -99,7 +99,7 @@ const CSCenter =  ({ navigation }) => {
     >
     <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm}/>
-        <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
+        <Container contentContainerStyle={{ paddingBottom: insets.bottom + 20}}>
            <TopWrap>
               <Image source={require('../../assets/csiconBig.png')}/>
               <BigTxt>무엇을 도와드릴까요?</BigTxt>

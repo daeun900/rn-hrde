@@ -16,12 +16,12 @@ const Container = styled.ScrollView`
 const BigTxt = styled.Text`
   font-size: 18px;
   line-height: 30px;
-  font-weight: 900;
+  font-weight: 800;
 `
 const MidTxt = styled.Text`
   font-size: 16px;
   line-height: 24px;
-  font-weight: 900;
+  font-weight: 800;
 `
 const SmallTxt = styled.Text`
   font-size: 14px;

@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         }
         },
         android: {
-          elevation: 3
+          elevation: 2
         }
       })
     }
@@ -117,19 +117,21 @@ const Home =  ({ navigation }) => {
     >
     <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm} borderBottomWidth="0px"/>
-        <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
+        <Container contentContainerStyle={{ paddingBottom: insets.bottom + 20}}>
             <CarouselBox style={{width:width}}>
                 <Carousel data={data} />
             </CarouselBox>
             <LectureBox activeOpacity={.8} onPress={() => navigation.navigate("Lecture")}>
               <FlexBox>
-                  <Image source={require('../../assets/profile_icon.png')}/>
+                  <Image source={require('../../assets/profile_icon.png')} style={{marginRight:10}}/>
                   <View>
                     <Name name={userNm}>
                         <BigTxt style={{ fontWeight: 600, marginRight:3}}>{userNm}</BigTxt>
                         <SmallTxt>님</SmallTxt>
                     </Name>
-                    <SmallTxt>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>
+                    <SmallTxt style={{fontSize:13
+
+                    }}>나의 학습실에서 수강중인 과정을 확인하세요</SmallTxt>
                   </View>
               </FlexBox>
               <View style={{width:'100%', backgroundColor:'#rgba(255,255,255,.5)', paddingVertical: 13, borderRadius: 26}}>

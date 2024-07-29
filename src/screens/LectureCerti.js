@@ -97,7 +97,7 @@ const Num = styled.Text`
     <View insets={insets} style={{flex:1}}>
        <Title>{ ContentsName }</Title>
        <SubTitle>[1차시_어린이집 평가 운영체계]</SubTitle>
-       <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
+       <Container contentContainerStyle={{ paddingBottom: insets.bottom + 30}}>
             <BigTxt style={{fontWeight:'900',textAlign:'center'}}>mOPT 인증</BigTxt>
             <MidTxt style={{marginTop:10,textAlign:'center'}}>mOTP앱에서 조회되는 인증번호를 입력하세요.</MidTxt>
             <InputWrap>

@@ -148,7 +148,7 @@ const LectureDetail = ({ navigation }) => {
   return (
     <View insets={insets} style={{flex:1}}>
         <TopSec name={userNm}/>
-        <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
+        <Container contentContainerStyle={{ paddingBottom: insets.bottom + 20}}>
           <LectureDetailBox>
               <Title>
                   {ContentsName}

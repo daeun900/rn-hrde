@@ -134,6 +134,7 @@ const LecturePlayer = ({ navigation }) => {
         resizeMode="contain"
         shouldPlay
         isLooping
+        onError={(error) => console.log(error)} 
       />
       <BtnWrap>
         <PrevBtn>

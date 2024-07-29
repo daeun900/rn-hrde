@@ -1,5 +1,5 @@
  import React,{useContext} from "react";
-import { Image, TouchableOpacity, Text } from "react-native";
+import { Image, TouchableOpacity, Text, Platform } from "react-native";
 import { ThemeContext } from "styled-components/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -26,7 +26,12 @@ const TabNav = () => {
                 tabBarInactiveTintColor: '#a6a6a6',
                 tabBarStyle: {
                     height: 90
-                }
+                },
+                tabBarLabelStyle: Platform.select({
+                    android: {
+                      marginBottom: 15,  // 안드로이드에서만 적용
+                    },
+                  }),
             }}
         >
             <Tab.Screen name="Home" component={Home} 
@@ -49,7 +54,9 @@ const TabNav = () => {
                 }}
             />
             <Tab.Screen name="Lecture" component={Lecture} 
-                options={{ headerShown: false,
+                options={{ 
+                    headerShown: false,
+                    tabBarLabel: '나의 학습실',
                     tabBarIcon: ({ focused }) =>
                         TabIcon({
                             name: focused ? 'user' : 'user', focused
