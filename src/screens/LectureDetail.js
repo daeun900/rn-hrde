@@ -141,9 +141,9 @@ const LectureDetail = ({ navigation }) => {
   const {userNm} = useContext(UserContext);
   const [activeTab, setActiveTab] = useState('tab1');
   const route = useRoute();
-  const { ContentsName, ProgressStep, ProgressNum, ProgressP } = route.params;
+  const { ContentsName, ProgressStep, ProgressNum, Chapter, ProgressP } = route.params;
 
-  console.log({ ContentsName, ProgressStep, ProgressNum, ProgressP } );
+  console.log({ ContentsName, ProgressStep, ProgressNum, Chapter, ProgressP } );
 
   return (
     <View insets={insets} style={{flex:1}}>
@@ -172,7 +172,7 @@ const LectureDetail = ({ navigation }) => {
                   </ProgressBox>
                   <ProgressBox>
                       <ProgressTitle><Text>강의진도</Text></ProgressTitle>
-                      <Progress><Point> {ProgressStep}</Point><SmallTxt>/{ProgressNum}</SmallTxt></Progress>
+                      <Progress><Point> {ProgressNum}</Point><SmallTxt>/{Chapter}</SmallTxt></Progress>
                   </ProgressBox>
                   <ProgressBox>
                       <ProgressTitle><Text>진도율</Text></ProgressTitle>

@@ -94,7 +94,7 @@ const LectureList = ({ navigation }) => {
         <Container contentContainerStyle={{ paddingBottom: insets.bottom}}>
             <FlatList
               data={lectures}
-              renderItem={({ item }) => <Item ContentsName={item.ContentsName} ProgressStep={item.ProgressStep} ProgressNum={item.ProgressNum} ProgressP={item.ProgressP} navigation={navigation} />}
+              renderItem={({ item }) => <Item ContentsName={item.ContentsName} ProgressStep={item.ProgressStep} ProgressNum={item.ProgressNum} Chapter={item.Chapter} ProgressP={item.ProgressP} navigation={navigation} />}
               keyExtractor={item => item.id}
               scrollEnabled={false}
               />
@@ -103,9 +103,9 @@ const LectureList = ({ navigation }) => {
   );
 }; 
 
-const Item = ({ContentsName,ProgressStep,ProgressNum,ProgressP,navigation}) => {
+const Item = ({ContentsName,ProgressStep,ProgressNum, Chapter, ProgressP,navigation}) => {
   return(
-    <Lecture  style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("LectureDetail", { ContentsName, ProgressStep, ProgressNum, ProgressP })}>
+    <Lecture  style={styles.shadow} activeOpacity={.8} onPress={() => navigation.navigate("LectureDetail", { ContentsName, ProgressStep, ProgressNum, Chapter, ProgressP })}>
       <TitleBox>
           <Title>{ContentsName}</Title>
       </TitleBox>
@@ -115,7 +115,7 @@ const Item = ({ContentsName,ProgressStep,ProgressNum,ProgressP,navigation}) => {
       </DetailBox>
       <DetailBox>
           <DetailTitle>강의진도</DetailTitle>
-          <Detail><Point>{ProgressStep}</Point>/{ProgressNum}</Detail>
+          <Detail><Point>{ProgressNum}</Point>/{Chapter}</Detail>
       </DetailBox>
       <DetailBox>
           <DetailTitle>진도율</DetailTitle>
