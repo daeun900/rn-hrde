@@ -13,7 +13,9 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.daeun900.rnhrde"
+      "bundleIdentifier": "com.daeun900.rnhrde",
+      "buildNumber":"1.0.0",
+      "icon": "./assets/icon.png"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,6 +31,7 @@
       "eas": {
         "projectId": "c970de56-064e-4cc9-ba19-141748b02d94"
       }
-    }
+    },
+    "owner": "daeun900"
   }
 }

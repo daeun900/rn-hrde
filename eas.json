@@ -1,30 +1,34 @@
 {
+  "cli": {
+    "version": ">= 0.38.0"
+  },
   "build": {
     "development": {
-      "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "workflow": "managed"
       },
       "ios": {
-        "simulator": true
+        "workflow": "managed"
       }
     },
     "preview": {
-      "distribution": "internal",
       "android": {
-        "buildType": "app-bundle"
+        "workflow": "managed"
       },
       "ios": {
-        "simulator": true
+        "workflow": "managed"
       }
     },
     "production": {
       "android": {
-        "buildType": "app-bundle"
+        "workflow": "managed"
       },
       "ios": {
-        "simulator": false
+        "workflow": "managed"
       }
     }
+  },
+  "submit": {
+    "production": {}
   }
 }
