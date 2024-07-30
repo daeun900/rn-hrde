@@ -1,0 +1,12 @@
+npm install -g react-native-cli
+
+npx create-expo-app 파일명 --template blank
+
+cd 파일명
+
+npm install styled-components prop-types @react-navigation/native @react-navigation/stack @react-navigation/bottom-tabs @react-navigation/material-top-tabs react-native-tab-view react-native-pager-view@6.3.0 axios react-native-dropdown-picker --save react-native-render-html @react-native-async-storage/async-storage
+
+npx expo install react-dom react-native-web @expo/metro-runtime react-native-screens react-native-safe-area-context react-native-reanimated react-native-webview expo-av @expo/vector-icons
+
+
+npx expo start 
