@@ -14,7 +14,7 @@ export const LectureProvider = ({ children }) => {
       if (userData && userData.value) {
         const userId = userData.value; // 아이디 추출
         console.log('userId 값 ---->', userId);
-        const response = await axios.post("http://new.hrdeedu.com/mobileTest/lecture_list.php", { id: userId });
+        const response = await axios.post("https://hrdeedu.co.kr/mobileTest/lecture_list.php", { id: userId });
 
         // 서버 응답 형식 확인
         console.log('Server response:', response.data);
