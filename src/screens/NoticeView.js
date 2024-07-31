@@ -59,7 +59,7 @@ const NoticeView = ({ route}) => {
     const { idx } = route.params;
 
     // 서버에서 데이터 가져오기
-    axios.post('http://new.hrdeedu.com/mobileTest/notice_detail.php', { idx })
+    axios.post('https://hrdeedu.co.kr/mobileTest/notice_detail.php', { idx })
       .then(response => {
         setNotice(response.data);
       })
@@ -71,7 +71,7 @@ const NoticeView = ({ route}) => {
   //webview css 수정
   const injectJavaScript = `
     const style = document.createElement('style');
-    style.innerHTML = 'body { max-width: 100%; margin: 0 auto; padding: 10px; box-sizing: border-box; } img { max-width: 100%; } span{font-size:50px !important}';
+    style.innerHTML = 'body { max-width: 100%; margin: 0 auto; padding: 10px; box-sizing: border-box; font-size:50px !important } img { max-width: 100%; } span{font-size:50px !important} p{font-size:50px !important}';
     document.head.appendChild(style);
   `;
 

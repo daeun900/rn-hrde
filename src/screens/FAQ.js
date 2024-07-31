@@ -73,7 +73,7 @@ const Faq =  ({ navigation }) => {
   //카테고리 가져오기
   const fetchFaqs = async () => {
     try {
-      const response = await axios.get('http://new.hrdeedu.com/mobileTest/faq_array.php'); 
+      const response = await axios.get('https://hrdeedu.co.kr/mobileTest/faq_array.php'); 
       setFaqArray(response.data.faqArray);
       console.log(faqArray)
     } catch (error) {
@@ -84,7 +84,7 @@ const Faq =  ({ navigation }) => {
   //검색기능
   const searchFaqs = async () => {
     try {
-      const response = await axios.post('http://new.hrdeedu.com/mobileTest/faq_list.php', {
+      const response = await axios.post('https://hrdeedu.co.kr/mobileTest/faq_list.php', {
         searchedWord: search,
         type: 'S'
       });
@@ -98,7 +98,7 @@ const Faq =  ({ navigation }) => {
   //질문리스트 가져오기
   const fetchCategoryFaqs = async (category) => {
     try {
-      const response = await axios.post('http://new.hrdeedu.com/mobileTest/faq_list.php', {
+      const response = await axios.post('https://hrdeedu.co.kr/mobileTest/faq_list.php', {
         category: category,
         type: 'C'
       });

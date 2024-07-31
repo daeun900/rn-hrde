@@ -1,6 +1,6 @@
 import React,{useEffect, useState, useContext}from "react";
 import styled from "styled-components/native";
-import { StyleSheet, Platform,View, FlatList, ActivityIndicator} from "react-native";
+import { StyleSheet, Platform,View, FlatList, ActivityIndicator,Image} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TopSec} from "../components";
 import { useLectureContext } from "../context/lectureContext";
@@ -8,6 +8,10 @@ import { UserContext } from "../context/userContext";
 
 const Container = styled.ScrollView`
   background-color: #F8F8F8 ;
+`;
+const MidTxt = styled.Text`
+  font-size: 16px;
+  line-height: 26px;
 `;
 
 const Lecture = styled.TouchableOpacity`
@@ -50,6 +54,13 @@ font-size: 16px;
 font-weight: 600;
 `
 
+const NullContainer = styled.View`
+  flex: 1;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+`;
+
 const styles = StyleSheet.create({
   shadow:{
     ...Platform.select({
@@ -82,9 +93,10 @@ const LectureList = ({ navigation }) => {
 
   if (!lectures.length) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
+      <NullContainer>
+      <Image source={require('../../assets/icon_null.png')} style={{ marginBottom: 20 }} />
+      <MidTxt>등록된 강의가 없습니다</MidTxt>
+    </NullContainer>
     );
   }
 
