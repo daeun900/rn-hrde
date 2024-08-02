@@ -80,7 +80,7 @@ const Signin = ({navigation}) => {
       Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
     } else {
       try {
-        const response = await axios.post("https://hrdeedu.co.kr/mobileTest/sign_in.php", { id: id, pwd: password });
+        const response = await axios.post("https://hrdelms.com/mobileTest/sign_in.php", { id: id, pwd: password });
         const result = response.data.result;
         const name = response.data.name;
         console.log('Server response:', response.data);

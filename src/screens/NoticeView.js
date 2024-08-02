@@ -59,7 +59,7 @@ const NoticeView = ({ route}) => {
     const { idx } = route.params;
 
     // 서버에서 데이터 가져오기
-    axios.post('https://hrdeedu.co.kr/mobileTest/notice_detail.php', { idx })
+    axios.post('https://hrdelms.com/mobileTest/notice_detail.php', { idx })
       .then(response => {
         setNotice(response.data);
       })

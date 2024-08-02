@@ -64,7 +64,7 @@ const Notice = ({ navigation }) => {
     updateUserNm();
 
     // 서버에서 데이터 가져오기(공지)
-    axios.post('https://hrdeedu.co.kr/mobileTest/notice_list.php')
+    axios.post('https://hrdelms.com/mobileTest/notice_list.php')
       .then(response => {
         const notiInfo1Data = response.data.notiInfo1.map((item) => ({
           title: item[0],
