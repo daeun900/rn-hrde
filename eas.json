@@ -1,4 +1,7 @@
-{
+{"cli":{
+  "version":">=1.0.2",
+  "appVersionSource":"remote"
+},
   "build": {
     "development": {
       "distribution": "internal",
@@ -20,7 +23,8 @@
     },
     "production": {
       "android": {
-        "buildType": "app-bundle"
+        "buildType": "app-bundle",
+        "autoIncrement":true
       },
       "ios": {
         "simulator": false
